@@ -1,0 +1,41 @@
+<div style="background-color: aliceblue;">
+  <div class="loading" *ngIf="loading$ | async">
+    <h1>Please wait...</h1>
+  </div>
+  <div style="width:65%; margin: 0 auto;">
+    <header>
+      <input class="search-field" [(ngModel)]="search" (ngModelChange)="watch($event)" name="search" type="text"
+        placeholder="Search by author name">
+      {{search}}
+      <button (click)="sortUser()">Sort by {{ toggle ? 'Z-A' : 'A-Z' }} </button>
+    </header>
+    <div class="user-container">
+      <!-- <div class="card" v-for="(user) in users" :key="user.id"> -->
+      <div class="card" *ngFor="let user of users">
+        <!-- <NewCardVue v-for="(user) in users" :key="user.id" :user="user" /> -->
+        <!-- <div> -->
+        <div>
+          <div style="display: flex; margin-top: 15px; padding: 10px; border-bottom: 2px solid #dbd4d4;">
+            <img src={{user.author_avatar}} alt="" style="border-radius:100px; width: 70px">
+            <div>
+              <h3>{{ user.author_name }}</h3>
+              <div style="font-size: 12px;">{{ user.created_at }}</div>
+            </div>
+          </div>
+          <div class="description">
+            {{ user.description }}
+          </div>
+          <div class="card-text">
+            <img src={{user.image_url}}>
+          </div>
+          <div class="views">
+            {{ user.views }} views
+          </div>
+        </div>
+        <!-- </template> -->
+      </div>
+      <!-- </div> -->
+    </div>
+  </div>
+</div>
+<button (click)='fetchAllUsers()'>Fetch Users</button>
